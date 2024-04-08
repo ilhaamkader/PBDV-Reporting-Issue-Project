@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+}
+body {
+    justify-content: center;
+    align-items: center;
+    background-image: url(https://bereamail.co.za/wp-content/uploads/sites/49/2023/06/DUT-Steve-Biko-campus-e1687861287959.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+.Container {
+    max-width: 650px;
+    padding: 20px 28px; /* Add padding above and below the container */
+    margin: 100px auto; /* Add margin to create space between the navbar and the container */
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.5); /* FAF0DC with 80% opacity */
+    box-shadow: 0 15px 20px rgba(0,0,0,0.6);
+    animation: slideIn 0.5s ease-in-out; /* Apply the animation to the container */
+}
+h2 {
+    font-size: 26px;
+    font-weight: bold;
+    font-family: "Bebas Neue", Arial, sans-serif;
+    letter-spacing: 1px; /* Adjust the value as needed */
+    text-align: left;
+    color: #fff;
+    padding-bottom: 8px;
+    border-bottom: 1px solid silver;
+    color: white; /* Set font color to black */
+
+}
+.content {
+    display: grid;
+    place-items: center;
+}
+.input-box label {
+    font-weight: bold;
+    color: #fff;
+}
+.input-box {
+    display: block;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 15px;
+}
+.input-box:nth-child(2n) {
+    justify-content: end;
+}
+.Container .input-box input {
+    color: black;
+    background-color: white;
+}
+
+.Container .input-box select {
+    color: black;
+}
+
+.input-box input {
+    height: 40px;
+    width: 95%;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    color: black; /* Change the text color of the input boxes to black */
+    background-color: white; /* Set a white background color for better contrast */
+}
+.input-box input:focus,
+.input-box input:valid {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+.input-box select {
+    display: block;
+    flex-wrap: wrap;
+    height: 40px;
+    width: 95%;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    color: black; /* Change the color of the dropdown box options to black */
+}
+.button-container {
+    margin: 15px 0;
+}
+.button-container button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    display: block;
+    font-size: 20px;
+    background-color: #3A5F3A;
+    border: none;
+    border-radius: 5px;
+    background-image: linear-gradient(to right, #aa076,#61045f);
+    cursor: pointer;
+    transition: 0.3s;
+}
+.button-container button:hover {
+    background-image: linear-gradient(to right, #ccc, #3A5F3A);
+}
+.input-box label, .input-box input, .input-box select {
+    color: white;
+}
+.button-container button {
+    color: white;
+}
+
+/* NEW CODE ADDED - title animations */
+
+/* Define the animation */
+@keyframes slideIn {
+    0% {
+        transform: translateY(-50px); /* Start position off the screen */
+        opacity: 0; /* Start with opacity 0 */
+    }
+    100% {
+        transform: translateY(0); /* End position on the screen */
+        opacity: 1; /* End with opacity 1 */
+    }
+}
+
+@keyframes textAnimate {
+                0% {
+                    stroke-dasharray: 0 50%;
+                    stroke-dashoffset: 20%;
+                    fill: white; /* Change fill color to white */
+                }
+                100% {
+                    stroke-dasharray: 50% 0;
+                    stroke-dashoffset: -20%;
+                    fill: hsla(189, 68%, 75%, 0%);
+                }
+            }

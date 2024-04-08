@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Home{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+{% block content %}
+<div class="container">
+<div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border rounded-3 mt-5">
+                <div class="card-body p-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <text x="45%" y="50%" class="text" stroke="#C0F0EF" letter-spacing="2px" font-size="41px" font-weight="700" stroke-width="1" style="animation: textAnimate 5s infinite alternate; text-anchor: middle; dominant-baseline: middle;">
+                            COMPLETED FAULT
+                        </text>
+                    </svg>
+                    <div class="completed-reports mt-4">
+            <div class="report">
+                <div class="report-heading">
+                    <p><strong>Campus:</strong> {{ campus_names[fault.Campus_ID] }}</p>
+                    <p><strong>Block:</strong> {{ fault.Block }}</p>
+                    <p><strong>Location:</strong> {{ fault.Location }}</p>
+                    <p><strong>Date submitted:</strong> {{ fault.Date_submitted }}</p>
+                </div>
+                <div class="report-description">
+                    <p><strong>Description:</strong> {{ fault.Description }}</p>
+                    <p><strong>Fault Type:</strong> {{ fault.Fault_Type }}</p>
+                    <p><strong>Upvotes:</strong> {{ fault.Upvotes | length }}</p>
+                    <p><strong>Status:</strong> {{ fault.Status }}</p>
+                    <p><strong>Date completed:</strong> {{ fault.Date_completed }}</p>
+                    <p><strong>Fault log:</strong> {{ fault.fault_log }}</p>
+                </div>
+            </div>
+            <div class="technician-info">
+                <p><strong>Technician:</strong> {{ fault.Technician.First_name }} {{ fault.Technician.Last_name }}</p>
+                <p><strong>Email:</strong> {{ fault.Technician.Email }}</p>
+                <p><strong>Phone Number:</strong> {{ fault.Technician.Phone_number }}</p>
+                <p><strong>Residing Area:</strong> {{ fault.Technician.Residing_area }}</p>
+                <p><strong>Job Description:</strong> {{ fault.Technician.Job_description }}</p>
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

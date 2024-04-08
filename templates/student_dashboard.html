@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Dashboard{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 serif-heading" style="padding-top: 80px;">
+            <div class="user-details">
+                <h1>Welcome, Student</h1>
+                <!-- User Information -->
+                <p>Name: {{ student_info.username }}</p>
+                <p>Email: {{ student_info.email }}</p>
+
+                <!-- Add more user details as needed -->
+                <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+            </div>
+        </div>
+        <div class="col-md-9 serif-heading" style="padding-top: 80px;">
+            <div id="dashboardCarousel" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <h2>Complaint Status</h2>
+                        <!-- Add complaint status section here -->
+                         <table class="table">
+                <thead>
+                    <tr>
+                        <th>Campus</th>
+                        <th>Block</th>
+                        <th>Location</th>
+                        <th>Description</th>
+                        <th>Fault Type</th>
+                        <th>Upvotes</th>
+                        <th>Date submitted</th>
+                        <th>Status</th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fault in faults %}
+                    <tr>
+                        <td>{{ campus_names[fault.Campus_ID] }}</td>
+                        <td>{{ fault.Block }}</td>
+                        <td>{{ fault.Location }}</td>
+                        <td>{{ fault.Description }}</td>
+                        <td>{{ fault.Fault_Type }}</td>
+                        <td>{{ fault.Upvotes | length }}</td>
+                        <td>{{ fault.Date_submitted }}</td>
+                        <td>{{ fault.Status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var carousel = new bootstrap.Carousel(document.getElementById('dashboardCarousel'), {
+            interval: false
+        });
+    });
+</script>
+{% endblock %}

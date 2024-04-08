@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Verify OTP{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='report_style.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="Container">
+    <h2>CHECK YOUR EMAIL</h2>
+    {{ render_form(form) }}
+    </div>
+
+{% endblock %}

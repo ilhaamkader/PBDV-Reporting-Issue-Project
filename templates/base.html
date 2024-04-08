@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>{% block title %}{% endblock %} - DUT Maintenance</title>
+    <link rel="icon" type="image/x-icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi_2Cg4JPYTU4qz4ixtmALqh0A4qForxRvBczPfvXLYxq4Tu9FpHoG_uoqzpse3gHRPtidHS6kD1gDu3y8UHOdCtJcRZdW576v6cfdm-8tVepaE36UhN_Z7mQUUMJDYbuzvme2YikCWYlAhDpXkrEcbfNHlC-Du8jbE0geXtEyRdj3XDBRNVP3fQoXf3JKs/s1600/dut.ico">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% endblock %}
+</head>
+<body>
+    <div id="content">
+        <nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container-fluid">
+        <a class="py-2" href="#" aria-label="Product">
+            <img src="https://dut-cdn2.azureedge.net/wp-content/uploads/2014/12/dut.png" alt="Product" width="40" height="40" style="padding: 5px;">
+        </a>
+        <a class="navbar-brand" href="{{ url_for('display_home') }}">DUT MAINTENANCE</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('display_home') }}">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('display_add_issue') }}">REPORT ISSUE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('display_issue') }}" aria-current="page">VIEW ISSUES</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('display_contact') }}">CONTACT US</a>
+                </li>
+                <li class="nav-item">
+                    {% if current_user.Role_ID == 1: %}
+                    <a class="nav-link" href="{{ url_for('display_admin_dashboard') }}">DASHBOARD</a>
+                    {% elif current_user.Role_ID == 3: %}
+                    <a class="nav-link" href="{{ url_for('display_technician_dashboard') }}">DASHBOARD</a>
+                    {% else: %}
+                    <a class="nav-link" href="{{ url_for('display_student_dashboard') }}">DASHBOARD</a>
+                    {% endif %}
+                </li>
+            </ul>
+              <!-- Updated section with Login and Register links -->
+            {% if not current_user.is_active: %}
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('display_login',user=1) }}">LOGIN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('display_registration') }}">REGISTER</a>
+                </li>
+            </ul>
+            {% else: %}
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">LOG OUT</a>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+                <!-- Flash message block -->
+        <div class="messages" id="flash-message">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="container">
+                    {% for category, message in messages %}
+                        <div class="flash-message-{{ category }} alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        </div>
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div id="footer">
+        <div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-body-secondary">© 2024 DUT Maintenance</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+    </a>
+  </footer>
+</div>
+        {% block footer %}
+        {% endblock %}
+    </div>
+    <!-- Bootstrap JavaScript bundle link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const flashMessage = document.getElementById('flash-message');
+
+        setTimeout(function() {
+            flashMessage.style.display = 'none';
+        }, 5000); // 5000 milliseconds = 5 seconds
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Register{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='report_style.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="Container">
+               <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <text x="27%" y="50%" class="text" stroke="#C0F0EF" letter-spacing="2px" font-size="50px" font-weight="700" stroke-width="1" style="animation: textAnimate 5s infinite alternate; text-anchor: middle; dominant-baseline: middle;">
+        REGISTER
+    </text>
+</svg>
+       {{ render_form(form) }}
+    </div>
+{% endblock %}

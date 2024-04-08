@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Dashboard{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 serif-heading" style="padding-top: 80px;">
+            <div class="user-details">
+                <h1>Welcome, Admin</h1>
+                <!-- User Information -->
+                <p>Name: {{ admin_info.username }}</p>
+                <p>Email: {{ admin_info.email }}</p>
+                {% if weather_forecast %}
+                    <h3>Weather Forecast:</h3>
+                    <ul>
+                        {% for key, value in weather_forecast.items() %}
+                            <li>{{ value }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No weather forecast available.</p>
+                {% endif %}
+                <!-- Add more user details as needed -->
+                <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+            </div>
+        </div>
+        <div class="col-md-9 serif-heading" style="padding-top: 80px;">
+            <div id="dashboardCarousel" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <h2>Admin Control</h2>
+                        <!-- Add complaint status section here, this page will have a contents page explaining what each slide on the carousel provides a content page for all the information on the other carousal pages,  -->
+                        <div class="p-tags" style="font-family: 'Poppins', sans-serif">
+                        <p>To go to <a href="#" onclick="slideToCarouselItem(1)">Pending Issues</a>, click here.</p>
+                        <p>To go to <a href="#" onclick="slideToCarouselItem(2)">Active Issues</a>, click here.</p>
+                        <p>To go to <a href="#" onclick="slideToCarouselItem(3)">Completed Issues</a>, click here.</p>
+                        <p>To go to <a href="#" onclick="slideToCarouselItem(4)">Technician Information</a>, click here.</p>
+                    </div>
+                    </div>
+                    <div class="carousel-item" id="pending-issues">
+                        <h2>Pending Reports</h2>
+                        <!-- Add view submitted complaints section here, this will show all pending reports, also provide the ability to add technicians to a report -->
+                        <table class="table">
+                <thead>
+                    <tr>
+                        <th>Campus</th>
+                        <th>Block</th>
+                        <th>Description</th>
+                        <th>Fault Type</th>
+                        <th>Upvotes</th>
+                        <th>Date submitted</th>
+                        <th>Priority</th>
+                        <th></th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fault in faults %}
+                    {% if fault.Status == 'Pending': %}
+                    <tr>
+                        <td>{{ campus_names[fault.Campus_ID] }}</td>
+                        <td>{{ fault.Block }}</td>
+                        <td>{{ fault.Description[:10] }}..<a href="{{ url_for('display_pending_fault',fault_id=fault.Fault_ID) }}">more</a></td>
+                        <td>{{ fault.Fault_Type }}</td>
+                        <td>{{ fault.Upvotes | length }}</td>
+                        <td>{{ fault.Date_submitted }}</td>
+                        <td>{{ fault.Priority }}</td>
+                        <td><a href="{{ url_for('delete_fault',fault_id=fault.Fault_ID) }}">Remove</a></td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+                        <a href="#" onclick="slideToCarouselItem(0)">Back to Admin Control</a>
+
+                    </div>
+                    <div class="carousel-item" id="active-issues">
+                        <h2>Active Reports</h2>
+                        <!-- Add section here, all active status reports and their technican info -->
+                        <table class="table">
+                <thead>
+                    <tr>
+                        <th>Campus</th>
+                        <th>Block</th>
+                        <th>Location</th>
+                        <th>Description</th>
+                        <th>Fault Type</th>
+                        <th>Upvotes</th>
+                        <th>Priority</th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fault in faults %}
+                    {% if fault.Status == 'In Progress': %}
+                    <tr>
+                        <td>{{ campus_names[fault.Campus_ID] }}</td>
+                        <td>{{ fault.Block }}</td>
+                        <td>{{ fault.Location }}</td>
+                        <td>{{ fault.Description[:10] }}..<a href="{{ url_for('display_active_fault_admin',fault_id=fault.Fault_ID) }}">more</a></td>
+                        <td>{{ fault.Fault_Type }}</td>
+                        <td>{{ fault.Upvotes | length }}</td>
+                        <td>{{ fault.Priority }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+                        <a href="#" onclick="slideToCarouselItem(0)">Back to Admin Control</a>
+                    </div>
+                    <div class="carousel-item" id="completed-issues">
+                        <h2>Completed Reports</h2>
+                        <!-- Add section here, a list of all completed reports -->
+                        <table class="table">
+
+                <thead>
+                    <tr>
+                        <th>Campus</th>
+                        <th>Block</th>
+                        <th>Location</th>
+                        <th>Description</th>
+                        <th>Fault Type</th>
+                        <th>Upvotes</th>
+                        <th>Date completed</th>
+                        <th>View history</th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fault in faults %}
+                    {% if fault.Status == 'Completed': %}
+                    <tr>
+                        <td>{{ campus_names[fault.Campus_ID] }}</td>
+                        <td>{{ fault.Block }}</td>
+                        <td>{{ fault.Location }}</td>
+                        <td>{{ fault.Description }}</td>
+                        <td>{{ fault.Fault_Type }}</td>
+                        <td>{{ fault.Upvotes | length }}</td>
+                        <td>{{ fault.Date_completed }}</td>
+                        <td><a href="{{ url_for('display_completed_fault_admin',fault_id=fault.Fault_ID) }}" class="btn btn-primary">View history</a></td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+                        <a href="#" onclick="slideToCarouselItem(0)">Back to Admin Control</a>
+                    </div>
+                    <div class="carousel-item" id="technician-info">
+                        <h2>Technician</h2>
+                        <!-- Add section here, technicians and a link to all reports they're working on while also providing the functionality to add more technicians -->
+                        <table class="table">
+                <thead>
+                    <tr>
+                        <th>Admin admission</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Residing Area</th>
+                        <th>Phone number</th>
+                        <th>Email</th>
+                        <th>Specialisation</th>
+
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tech in technicians %}
+                    <tr>
+                        <td>{{ all_admins_dict[tech.Admin_ID] }}</td>
+                        <td>{{ tech.First_name }}</td>
+                        <td>{{ tech.Last_name }}</td>
+                        <td>{{ tech.Residing_area }}</td>
+                        <td>{{ tech.Phone_number }}</td>
+                        <td>{{ tech.Email }}</td>
+                        <td>{{ tech.Job_description }}</td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+                        <a href="#" onclick="slideToCarouselItem(0)">Back to Admin Control</a>
+                        <a href="{{ url_for('display_technician_registration') }}" class="btn btn-primary">Add technician</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var carousel = new bootstrap.Carousel(document.getElementById('dashboardCarousel'), {
+            interval: false
+        });
+    });
+    function slideToCarouselItem(index) {
+    var carousel = new bootstrap.Carousel(document.getElementById('dashboardCarousel'));
+    carousel.to(index); // Slide to the specified carousel item
+}
+</script>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Log In{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='report_style.css') }}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock %}
+{% block content %}
+    <div class="Container">
+               <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <text x="50%" y="50%" class="text" stroke="#C0F0EF" letter-spacing="2px" font-size="50px" font-weight="700" stroke-width="1" style="animation: textAnimate 5s infinite alternate; text-anchor: middle; dominant-baseline: middle;">
+        ADD YOUR ISSUE
+    </text>
+</svg>  <div style="display: flex; justify-content: center;">
+    <img id="campus_image" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEin2POv_ZjS_bdYsKVLhrNmBJk9BYNuLlU_z3m39uaN3Ht67bpK9a0EY-xDdbOs1u76eYMc6lJGjpUlOgu6SXYY-DK4MMh55c7fCMpYoWPIFww2Mh9vmGrje56bOeNBeYKTH_iMmf8FEslsb1oRbQZJYMkq9Qm-gaus3-adnSEGQPcR9bV9Gjtks7Ib6YoZ/w602-h382/A4-MLST-site-map-for-WEB-20-09-181%20(1).jpg" alt="Campus Image" style="width: 80%; height: 50vw; max-width: 100%; max-height: 50vh; box-shadow: 0 0 10px 5px #ffffff;">
+</div>
+        {{ render_form(form) }}
+        <script>
+        $(document).ready(function() {
+            $('#campus').change(function() {
+                var selectedCampus = $(this).val();
+                var blocks = JSON.parse('{{ blocks | tojson | safe }}');
+                var blockSelect = $('#block');
+                blockSelect.empty();
+                $.each(blocks[selectedCampus], function(index, value) {
+                    blockSelect.append('<option value="' + value + '">' + value + '</option>');
+                });
+            });
+        });
+
+            $(document).ready(function() {
+            // JavaScript code for dynamic behavior
+            $('#campus').change(function() {
+                // Handle change event of campus select field
+                var selectedCampus = $(this).val();
+                var campusImgDict = {{ campus_img_dict | tojson | safe }};
+                var campusImage = $('#campus_image');
+                // Set the src attribute of the image to the URL of the selected campus image
+                campusImage.attr('src', campusImgDict[selectedCampus]);
+            });
+        });
+    </script>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Issue resolved{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {{ ckeditor.load() }}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 serif-heading" style="padding-top: 60px;">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                <text x="50%" y="50%" class="text" stroke="#C0F0EF" letter-spacing="2px" font-size="50px" font-weight="700" stroke-width="1" style="animation: textAnimate 5s infinite alternate; text-anchor: middle; dominant-baseline: middle;">
+                    FILTERED POSTS
+                </text>
+            </svg>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Campus</th>
+                        <th>Block</th>
+                        <th>Description</th>
+                        <th>Fault Type</th>
+                        <th>Upvotes</th>
+                        <th>Date submitted</th>
+
+
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fault in faults %}
+                    {% if fault.Status == 'Completed' %}
+                    <tr>
+                        <td>{{ campus_names[fault.Campus_ID] }}</td>
+                        <td>{{ fault.Block }}</td>
+                        <td>{{ fault.Description[:10] }}..<a href="{{ url_for('display_completed_tech_fault',fault_id=fault.Fault_ID) }}">more</a></td>
+                        <td>{{ fault.Fault_Type }} : </td>
+                        <td>{{ fault.Upvotes | length }}</td>
+                        <td>{{ fault.Date_submitted }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

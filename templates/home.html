@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Home{% endblock %}
+{% block head %}
+    {{ super() }}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+{% block content %}
+<div class="container ">
+<div class="container my-5" style="background-image: url('https://bereamail.co.za/wp-content/uploads/sites/49/2023/06/DUT-Steve-Biko-campus-e1687861287959.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+        <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis serif-heading" style="color: #FFFFCC !important;  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Maintenance Reporting. At your fingertips</h1>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                <a href="{{ url_for('display_registration') }}" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">REGISTER NOW</a>
+                <a href="#" class="btn btn-outline-secondary btn-lg px-4">CONTACT US</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="featurette-divider">
+<!-- Mission Featurette -->
+<div class="row featurette">
+    <div class="col-md-7 fade-in-section">
+        <div style="padding: 60px;">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis serif-heading">Our Mission</h1>
+            <p class="lead">Our web application serves as a centralized platform for reporting and resolving maintenance issues across our campuses. Students and faculty can easily report issues, track progress, and receive updates, ensuring a safe and functional learning environment for all campus members.</p>
+            <p class="lead">We are committed to providing an efficient and user-friendly platform for reporting maintenance issues on campus. Our goal is to ensure a safe and functional learning environment by streamlining the reporting and resolution process.</p>
+        </div>
+    </div>
+   <div class="col-md-5 fade-in-section">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-1">
+            <div style="padding-top: 60px;">
+                <img src="https://freewebillustrations.com/static/images/preview/delesign-free-designs-to-do-list.png" class="img-fluid rounded-lg-3" alt="Maintenance">
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="featurette-divider">
+<!-- Features Container -->
+<div class="container marketing fade-in-section">
+    <div class="row">
+        <div style="padding-top: 60px;">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis serif-heading">Platform Perks</h1>
+        </div>
+        <div class="col-lg-4" style="padding: 50px; text-align: center;">
+            <div style="padding-bottom: 30px; padding-top:10px; border: 2px solid #007bff; box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); border-radius: 10px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
+                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                    <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
+                </svg>
+
+            <h2>USER-FRIENDLY</h2>
+            <p>Our application features a user-friendly reporting form, making it easy for students and faculty to report maintenance issues.</p>
+        </div>
+        </div>
+        <div class="col-lg-4" style="padding: 50px; text-align: center;">
+            <div style=" padding-top: 30px; border: 2px solid #28a745; box-shadow: 0 0 10px rgba(40, 167, 69, 0.5); border-radius: 10px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            <h2>TRACK YOUR PROGRESS</h2>
+            <p>Track the progress of reported issues and stay informed about the resolution process.</p>
+        </div>
+        </div>
+        <div class="col-lg-4" style="padding: 50px; text-align: center;">
+            <div style="padding-bottom: 30px; padding-top: 50px; border: 2px solid #dc3545; box-shadow: 0 0 10px rgba(220, 53, 69, 0.5); border-radius: 10px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-app-indicator" viewBox="0 0 16 16">
+                    <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1z"/>
+                    <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                </svg>
+            <h2>UPDATES</h2>
+            <p>Receive timely updates on reported issues and their status.</p>
+        </div>
+        </div>
+    </div>
+</div>
+
+ <hr class="featurette-divider">
+<!-- New section: How to Use Our App -->
+<div id="how-to-use-app" class="row featurette">
+    <div class="col-md-4">
+        <div style="padding: 30px;">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis serif-heading fade-in-section" style="padding-bottom: 30px;">ARE YOU A STUDENT?</h1>
+
+            <!-- Register & Log In -->
+            <div class="section fade-in-section">
+                <h3>Register & Log In</h3>
+                <p><a href="{{ url_for('display_registration') }}">Register</a> using their dut4life email and a chosen password upon initial app use.</p>
+                <p><a href="{{ url_for('display_login',user=1) }}">Log In</a> to your account to access the app features.</p>
+            </div>
+
+
+            <hr class="featurette-divider">
+
+            <!-- Report Issues -->
+            <div class="section fade-in-section">
+                <h3>Report Issues</h3>
+                <p>Once logged in, submit your issue via the "<a href="{{ url_for('display_add_issue') }}">Report Issue</a>" tab, specifying campus, block, and exact location.</p>
+                <p>Provide a brief summary and select an appropriate issue type from the dropdown.</p>
+                <p>Once you click submit, you're good to go! Our maintenance team will promptly address the reported issue.</p>
+            </div>
+
+            <hr class="featurette-divider">
+
+            <!-- Upvote -->
+            <div class="section">
+                <h3>Upvote</h3>
+                <p>You can explore the list of current via our "<a href="{{ url_for('display_issue') }}">View Issues</a>" tab.</p>
+                <p>You have the option to upvote issues they encounter, prioritizing them for resolution.</p>
+                <p>Ensure that you are logged in to utilize our upvoting system.</p>
+                <div style="text-align: center; padding-top: 60px;">
+                    <img src="https://www.ecompanies.com.au/wp-content/uploads/2022/06/ProAccount-Vector_Pro-1280x1036.png" width="300" height="250">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Are you a technician? -->
+<div class="col-md-4 ">
+    <div style="padding: 30px;">
+        <h1 class="display-4 fw-bold lh-1 text-body-emphasis serif-heading fade-in-section" style="padding-bottom: 30px;">ARE YOU A TECHNICIAN?</h1>
+
+        <!-- Content for technician -->
+        <div class="section fade-in-section">
+            <h3>Log In</h3>
+            <p><a href="{{ url_for('display_login',user=2) }}">Log In</a>  with your technician credentials to access to the technician dashboard where you can view assigned issues, update their status, and communicate with users.</p>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="section fade-in-section">
+            <h3>View Assigned Issues</h3>
+            <p>Access the list of issues assigned to you and view detailed information about each issue, including its status, priority, and location.</p>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="section fade-in-section">
+            <h3>Update Issue Status</h3>
+            <p>Update the status of assigned issues as you work on them. You can mark issues as in progress, resolved, or escalate them if necessary.</p>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="section">
+            <h3>Communicate with Users</h3>
+            <p>Communicate with users who have reported issues to gather additional information, provide updates on the progress of their reported issues, and resolve any concerns they may have.</p>
+            <img src="https://newcool.sg/wp-content/uploads/2022/08/repairtroubleshoot-1.png" width="310" height="310">
+        </div>
+    </div>
+</div>
+
+    <!-- Are you an admin? -->
+<div class="col-md-4">
+    <div style="padding: 30px;">
+        <h1 class="display-4 fw-bold lh-1 text-body-emphasis serif-heading fade-in-section" style="padding-bottom: 30px;">ARE YOU AN ADMIN?</h1>
+
+        <!-- Content for admin -->
+        <div class="section fade-in-section">
+            <h3>Log In</h3>
+            <p><a href="{{ url_for('display_login',user=3) }}">Log In</a>  as an admin to get access to the admin dashboard where you can manage users, view and resolve reported issues, and perform administrative tasks.</p>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="section fade-in-section">
+            <h3>Manage Users</h3>
+            <p>Add, edit, or remove users from the system.</p>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="section fade-in-section">
+            <h3>View and Resolve Issues</h3>
+            <p>Access the list of reported issues and take necessary actions to resolve them. Assign issues to technicians, track their progress, and communicate with users regarding their reported issues.</p>
+        </div>
+
+        <hr class="featurette-divider" style="padding-bottom: 280px;">
+                <div style="text-align: center;">
+                    <img src="https://redheadcallcenter.com/wp-content/uploads/2022/09/redhead-call-center-girl.png" width="270" height="270">
+                </div>
+            </div>
+        </div>
+    </div></div>
+
+<hr class="featurette-divider">
+<!-- Features Download App -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <p class="dut-app-dec" style="font-size: 30px; padding-top: 20px; font-weight: bold;" align="center">Download the official DUT App for your mobile device – Available on iOS and Android</p>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6" style="padding-top: 50px;">
+                    <a href="https://appsto.re/za/sO6B4.i" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 10px 15px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-apple" viewBox="0 0 16 16">
+                          <path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282"/>
+                          <path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282"/>
+                        </svg> Download on the App Store
+                    </a>
+                </div>
+                <div class="col-md-6" style="padding-top: 50px;">
+                    <a href="https://play.google.com/store/apps/details?id=za.co.wisolve.dut" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 10px 15px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google-play" viewBox="0 0 16 16">
+
+                            <path d="M14.222 9.374c1.037-.61 1.037-2.137 0-2.748L11.528 5.04 8.32 8l3.207 2.96zm-3.595 2.116L7.583 8.68 1.03 14.73c.201 1.029 1.36 1.61 2.303 1.055zM1 13.396V2.603L6.846 8zM1.03 1.27l6.553 6.05 3.044-2.81L3.333.215C2.39-.341 1.231.24 1.03 1.27"/>
+                        </svg> Get it on Google Play
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    // Function to check if an element is in the viewport
+    function isInViewport(element) {
+        var rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    // Function to handle scroll event
+    function fadeElementsOnScroll() {
+        const elements = document.querySelectorAll('.fade-in-section');
+        elements.forEach(element => {
+            if (isInViewport(element)) {
+                element.classList.add('visible');
+            }
+        });
+    }
+
+    // Add scroll event listener
+    document.addEventListener('scroll', fadeElementsOnScroll);
+
+    // Initial check on page load
+    fadeElementsOnScroll();
+</script>
+
+{% endblock %}

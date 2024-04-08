@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}View Issues{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="style.css">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 serif-heading" style="padding-top: 60px;">
+                   <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <text x="35%" y="50%" class="text" stroke="#C0F0EF" letter-spacing="2px" font-size="50px" font-weight="700" stroke-width="1" style="animation: textAnimate 5s infinite alternate; text-anchor: middle; dominant-baseline: middle;">
+        VIEW ISSUES
+    </text>
+</svg>
+            <!-- Display table of issues -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Campus</th>
+                        <th>Block</th>
+                        <th>Location</th>
+                        <th>Description</th>
+                        <th>Fault Type</th>
+                        <th>Upvotes</th>
+                        <th>Date submitted</th>
+                        <th>Status</th>
+                        <th>Priority</th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fault in faults %}
+                    <tr>
+                        <td>{{ campus_names[fault.Campus_ID] }}</td>
+                        <td>{{ fault.Block }}</td>
+                        <td>{{ fault.Location }}</td>
+                        <td>{{ fault.Description }}</td>
+                        <td>{{ fault.Fault_Type }}</td>
+                        <td>{{ fault.Upvotes | length }} : <a class="btn btn-primary" href="{{ url_for('upvote_issue',fault_id=fault.Fault_ID) }}">Primary</a></td>
+                        <td>{{ fault.Date_submitted }}</td>
+                        <td>{{ fault.Status }}</td>
+                        <td>{{ fault.Priority }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+    </div>
+  </div>
+{% endblock %}
