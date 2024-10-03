@@ -1,6 +1,6 @@
 # University Maintenance Reporting App
 
-**Project for Module: PBDV**
+**Project for Module: PBDV301**
 
 Welcome to the Maintenance Reporting App, a project developed as part of the PBDV module. This web application was designed to streamline the process of reporting and managing maintenance issues across the university campus.
 
